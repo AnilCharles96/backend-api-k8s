@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-sre
+spec:
+  schedule: "*/30 * * * *"  
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: hello-sre  
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - echo "Hello SRE"
+          restartPolicy: OnFailure
